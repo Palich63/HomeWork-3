@@ -32,8 +32,23 @@ class ConditionTest {
     @Test
     void decreaseCurrentTemperature() {
         Condition condition = new Condition();
+
+        //Установка минимальной температуры
         condition.setMinTemperature(16);
 
-        //assertEquals(condition.getMinTemperature(), condition.getCurrentTemperature());
+        // Установка валидной температуры
+        condition.setCurrentTemperature(20);
+        condition.increaseCurrentTemperature(condition.getCurrentTemperature());
+        assertEquals(19, condition.getCurrentTemperature());
+
+        // Установка температуры ниже минимума
+        condition.setCurrentTemperature(10);
+        condition.increaseCurrentTemperature(condition.getCurrentTemperature());
+        assertEquals(10, condition.getCurrentTemperature());
+
+        //Установка температуры с выходом за минимум
+        condition.setCurrentTemperature(16);
+        condition.increaseCurrentTemperature(condition.getCurrentTemperature());
+        assertEquals(16, condition.getCurrentTemperature());
     }
 }
