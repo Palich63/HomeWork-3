@@ -58,10 +58,11 @@ public class Condition {
     }
 
     public void decreaseCurrentTemperature(int currentTemperature) {
-        if (currentTemperature-- < minTemperature){
+        currentTemperature--;
+        if (currentTemperature < minTemperature){
             return;
         }
-        currentTemperature--;
+        this.currentTemperature = currentTemperature;
     }
 
 }
