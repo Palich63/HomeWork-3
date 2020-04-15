@@ -7,11 +7,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConditionTest {
 
     @Test
-    public void shouldNotChangeFieldsValue() {
-        ConditionAdvanced conditioner = new ConditionAdvanced();
+    void shouldIncreaseTemperature() {
+        Condition condition = new Condition();
+        condition.setMaxTemperature(32);
 
-        assertEquals(0, conditioner.getCurrentTemperature());
-        conditioner.setCurrentTemperature(-100);
-        assertEquals(-100, conditioner.getCurrentTemperature());
+        for (condition.setCurrentTemperature(16); condition.getCurrentTemperature() < condition.getMaxTemperature();) {
+             condition.increaseCurrentTemperature(condition.getCurrentTemperature());
+            }
+    assertEquals(condition.getMaxTemperature(), condition.getCurrentTemperature());
+    }
+
+    @Test
+    void decreaseCurrentTemperature() {
+        Condition condition = new Condition();
+        condition.setMinTemperature(16);
+
+        for (condition.setCurrentTemperature(32); condition.getCurrentTemperature() > condition.getMinTemperature();) {
+            condition.decreaseCurrentTemperature(condition.getCurrentTemperature());
+        }
+        assertEquals(condition.getMinTemperature(), condition.getCurrentTemperature());
     }
 }
