@@ -39,7 +39,7 @@ public class Radio {
     }
 
     public void nextStation(){
-        if ((currentStation + 1) >= 10) {
+        if ((currentStation + 1) >= 9) {
             currentStation = 0;
             return;
         }
@@ -47,9 +47,22 @@ public class Radio {
     }
 
     public void inputStation(){
-      if ((numberStation < 0 || numberStation > 10)){
+      if ((numberStation < 0 || numberStation > 9)){
           return;
       }
         currentStation = numberStation;
+    }
+
+    public void increaseVolume(){
+        if ((currentVolume + 1) > 10) {
+            return;
+        }
+        currentVolume++;
+    }
+    public void reduceVolume(){
+        if ((currentVolume - 1) < 0) {
+            return;
+        }
+        currentVolume--;
     }
 }
