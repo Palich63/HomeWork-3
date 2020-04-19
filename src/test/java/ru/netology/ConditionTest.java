@@ -17,12 +17,12 @@ class ConditionTest {
         condition.increaseCurrentTemperature();
         assertEquals(21, condition.getCurrentTemperature());
 
-        // Установка температуры выше максимума
-        condition.setCurrentTemperature(40);
+        // Установка максимальной температцры. Проверка на границе
+        condition.setCurrentTemperature(31);
         condition.increaseCurrentTemperature();
-        assertEquals(40, condition.getCurrentTemperature());
+        assertEquals(32, condition.getCurrentTemperature());
 
-        //Установка температуры с выходом за максимум
+        //Попытка увеличить температуру выше максимума
         condition.setCurrentTemperature(32);
         condition.increaseCurrentTemperature();
         assertEquals(32, condition.getCurrentTemperature());
@@ -41,12 +41,12 @@ class ConditionTest {
         condition.decreaseCurrentTemperature();
         assertEquals(19, condition.getCurrentTemperature());
 
-        // Установка температуры ниже минимума
-        condition.setCurrentTemperature(10);
+        // Установка минимальной температуры. Проверка на границе
+        condition.setCurrentTemperature(17);
         condition.decreaseCurrentTemperature();
-        assertEquals(10, condition.getCurrentTemperature());
+        assertEquals(16, condition.getCurrentTemperature());
 
-        //Установка температуры с выходом за минимум
+        //Попытка уменьшения температуры ниже минимума
         condition.setCurrentTemperature(16);
         condition.decreaseCurrentTemperature();
         assertEquals(16, condition.getCurrentTemperature());

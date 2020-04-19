@@ -6,68 +6,106 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
     Radio radio = new Radio();
-    @Test
-    void shouldNextPreviousStation(){
 
+    @Test
+    void shouldPreviousStation() {
+        radio.setMintStation(0);
+        radio.setMaxStation(9);
+
+        //Уменьшение станции в валидном диапазоне
         radio.setCurrentStation(6);
-        //Уменьшение станции
         radio.previousStation();
-        assertEquals(5, radio.getCurrentStation() );
-        //Увеличение станции
-        radio.nextStation();
-        assertEquals(6, radio.getCurrentStation() );
-
-        //Переход со станции 0 на 9
-        radio.setCurrentStation(0);
-        radio.previousStation();
-        assertEquals(9, radio.getCurrentStation() );
-        //Переход со станции 9 на 0
-        radio.nextStation();
-        assertEquals(0, radio.getCurrentStation() );
-    }
-
-    @Test
-    void shouldInputStation() {
-
-        //Установка валидной станции
-        radio.setNumberStation(7);
-        radio.inputStation();
-        assertEquals(7, radio.getCurrentStation());
-
-        //Установка невалидной станции
-        radio.setCurrentStation(5);
-        radio.setNumberStation(19);
-        radio.inputStation();
         assertEquals(5, radio.getCurrentStation());
 
-        radio.setCurrentStation(8);
-        radio.setNumberStation(-21);
-        radio.inputStation();
-        assertEquals(8, radio.getCurrentStation());
+        //Переход с станции 0 на 9
+        radio.setCurrentStation(0);
+        radio.previousStation();
+        assertEquals(9, radio.getCurrentStation());
 
-        //Установка той же станции и граничной
-        radio.setNumberStation(0);
-        radio.inputStation();
+        //Переход на граничную станцию
+        radio.setCurrentStation(1);
+        radio.previousStation();
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    void shouldIncreaseReduceVolume(){
+    void shouldNextStation() {
+        radio.setMaxStation(9);
+        radio.setMintStation(0);
 
-        radio.setCurrentVolume(7);
-       //Увеличиваем громкость
+
+        //Увеличение станции в валидном диапазоне
+        radio.setCurrentStation(6);
+        radio.nextStation();
+        assertEquals(7, radio.getCurrentStation());
+
+        //Переход со станции 9 на 0
+        radio.setCurrentStation(9);
+        radio.nextStation();
+        assertEquals(0, radio.getCurrentStation());
+
+        //Переход на граничную станцию
+        radio.setCurrentStation(8);
+        radio.nextStation();
+        assertEquals(9, radio.getCurrentStation());
+    }
+
+    @Test
+    void shouldInputStation() {
+        radio.setMintStation(0);
+        radio.setMaxStation(9);
+
+        //Установка валидной станции
+        radio.setCurrentStation(7);
+        radio.inputStation();
+        assertEquals(7, radio.getCurrentStation());
+
+        //Установка минимальной станции
+        radio.setCurrentStation(0);
+        radio.inputStation();
+        assertEquals(0, radio.getCurrentStation());
+
+        //Установка максимальной станции
+        radio.setCurrentStation(9);
+        radio.inputStation();
+        assertEquals(9, radio.getCurrentStation());
+    }
+
+    @Test
+    void shouldIncreaseVolume() {
+        radio.setMaxVolume(10);
+
+        //Увеличиваем громкость
+        radio.setCurrentVolume(5);
         radio.increaseVolume();
-        assertEquals(8, radio.getCurrentVolume());
-        //Уменьшение громкость
-        radio.reduceVolume();
-        assertEquals(7, radio.getCurrentVolume());
+        assertEquals(6, radio.getCurrentVolume());
 
-        //Максимальная громкость
-        radio.setCurrentVolume(10);
+        //Увеличение до границы
+        radio.setCurrentVolume(9);
         radio.increaseVolume();
         assertEquals(10, radio.getCurrentVolume());
 
-        //Минимальная громкость
+        //Увеличение при максимальной громкости
+        radio.setCurrentVolume(10);
+        radio.increaseVolume();
+        assertEquals(10, radio.getCurrentVolume());
+    }
+
+    @Test
+    void shouldReduceVolume() {
+        radio.setMinVolume(0);
+
+        //Уменьшение громкость
+        radio.setCurrentVolume(3);
+        radio.reduceVolume();
+        assertEquals(2, radio.getCurrentVolume());
+
+        //Уменьшение до границы
+        radio.setCurrentVolume(1);
+        radio.reduceVolume();
+        assertEquals(0, radio.getCurrentVolume());
+
+        //Уменьшение при минимальной громкости
         radio.setCurrentVolume(0);
         radio.reduceVolume();
         assertEquals(0, radio.getCurrentVolume());
