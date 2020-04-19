@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioTest {
     Radio radio = new Radio();
 
-
     @Test
     void shouldPreviousStation() {
         radio.setMintStation(0);
@@ -29,12 +28,10 @@ class RadioTest {
         assertEquals(0, radio.getCurrentStation());
     }
 
-
     @Test
     void shouldNextStation() {
         radio.setMaxStation(9);
         radio.setMintStation(0);
-
 
         //Увеличение станции в валидном диапазоне
         radio.setCurrentStation(6);
@@ -51,7 +48,6 @@ class RadioTest {
         radio.nextStation();
         assertEquals(9, radio.getCurrentStation());
     }
-
 
     @Test
     void shouldInputStation() {
@@ -74,7 +70,6 @@ class RadioTest {
         assertEquals(9, radio.getCurrentStation());
     }
 
-
     @Test
     void shouldIncreaseVolume() {
         radio.setMaxVolume(10);
@@ -94,7 +89,6 @@ class RadioTest {
         radio.increaseVolume();
         assertEquals(10, radio.getCurrentVolume());
     }
-
 
     @Test
     void shouldReduceVolume() {
