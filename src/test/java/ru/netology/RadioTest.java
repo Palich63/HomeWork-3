@@ -55,18 +55,17 @@ class RadioTest {
         radio.setMaxStation(9);
 
         //Установка валидной станции
-        radio.setCurrentStation(7);
-        radio.inputStation();
+        radio.inputStation(7);
         assertEquals(7, radio.getCurrentStation());
 
         //Установка минимальной станции
-        radio.setCurrentStation(0);
-        radio.inputStation();
-        assertEquals(0, radio.getCurrentStation());
+        radio.setCurrentStation(3);
+        radio.inputStation(-5);
+        assertEquals(3, radio.getCurrentStation());
 
         //Установка максимальной станции
         radio.setCurrentStation(9);
-        radio.inputStation();
+        radio.inputStation(15);
         assertEquals(9, radio.getCurrentStation());
     }
 
