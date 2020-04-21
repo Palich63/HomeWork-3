@@ -9,8 +9,6 @@ class RadioTest {
 
     @Test
     void shouldPreviousStation() {
-        radio.setMintStation(0);
-        radio.setMaxStation(9);
 
         //Уменьшение станции в валидном диапазоне
         radio.setCurrentStation(6);
@@ -20,7 +18,7 @@ class RadioTest {
         //Переход с станции 0 на 9
         radio.setCurrentStation(0);
         radio.previousStation();
-        assertEquals(9, radio.getCurrentStation());
+        assertEquals(10, radio.getCurrentStation());
 
         //Переход на граничную станцию
         radio.setCurrentStation(1);
@@ -30,8 +28,6 @@ class RadioTest {
 
     @Test
     void shouldNextStation() {
-        radio.setMaxStation(9);
-        radio.setMintStation(0);
 
         //Увеличение станции в валидном диапазоне
         radio.setCurrentStation(6);
@@ -39,20 +35,18 @@ class RadioTest {
         assertEquals(7, radio.getCurrentStation());
 
         //Переход со станции 9 на 0
-        radio.setCurrentStation(9);
+        radio.setCurrentStation(10);
         radio.nextStation();
         assertEquals(0, radio.getCurrentStation());
 
         //Переход на граничную станцию
-        radio.setCurrentStation(8);
+        radio.setCurrentStation(9);
         radio.nextStation();
-        assertEquals(9, radio.getCurrentStation());
+        assertEquals(10, radio.getCurrentStation());
     }
 
     @Test
     void shouldInputStation() {
-        radio.setMintStation(0);
-        radio.setMaxStation(9);
 
         //Установка валидной станции
         radio.inputStation(7);
@@ -71,7 +65,6 @@ class RadioTest {
 
     @Test
     void shouldIncreaseVolume() {
-        radio.setMaxVolume(10);
 
         //Увеличиваем громкость
         radio.setCurrentVolume(5);
@@ -79,19 +72,18 @@ class RadioTest {
         assertEquals(6, radio.getCurrentVolume());
 
         //Увеличение до границы
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(99);
         radio.increaseVolume();
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
 
         //Увеличение при максимальной громкости
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
     void shouldReduceVolume() {
-        radio.setMinVolume(0);
 
         //Уменьшение громкость
         radio.setCurrentVolume(3);
