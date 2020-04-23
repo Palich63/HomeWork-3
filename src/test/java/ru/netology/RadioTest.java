@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RadioTest {
-    Radio radio = new Radio(5,10,0,20,0,100);
+    Radio radio = new Radio(5,7,0,20,0,50);
 
     @Test
     void shouldPreviousStation() {
@@ -20,9 +20,9 @@ class RadioTest {
         radio.previousStation();
         assertEquals(0, radio.getCurrentStation());
 
-        //Переход с станции 0 на 10
+        //Переход с минимальной станции на максимальную
         radio.previousStation();
-        assertEquals(10, radio.getCurrentStation());
+        assertEquals(7, radio.getCurrentStation());
     }
 
     @Test
@@ -34,12 +34,12 @@ class RadioTest {
         assertEquals(7, radio.getCurrentStation());
 
         //Переход на граничную станцию
-        radio.setCurrentStation(9);
+        radio.setCurrentStation(6);
         radio.nextStation();
-        assertEquals(10, radio.getCurrentStation());
+        assertEquals(7, radio.getCurrentStation());
 
-        //Переход со станции 10 на 0
-        radio.setCurrentStation(10);
+        //Переход с максимальной станции на минимальную
+        radio.setCurrentStation(7);
         radio.nextStation();
         assertEquals(0, radio.getCurrentStation());
     }
@@ -71,14 +71,14 @@ class RadioTest {
         assertEquals(6, radio.getCurrentVolume());
 
         //Увеличение до границы
-        radio.setCurrentVolume(99);
+        radio.setCurrentVolume(49);
         radio.increaseVolume();
-       // assertEquals(100, radio.getCurrentVolume());
+        assertEquals(50, radio.getCurrentVolume());
 
         //Увеличение при максимальной громкости
-        radio.setCurrentVolume(100);
+        radio.setCurrentVolume(50);
         radio.increaseVolume();
-        assertEquals(100, radio.getCurrentVolume());
+        assertEquals(50, radio.getCurrentVolume());
     }
 
     @Test
